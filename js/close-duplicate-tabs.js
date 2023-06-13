@@ -28,7 +28,8 @@ async function closeDuplicateTabs() {
         tabObjects.forEach(function(tab) {
             if (!urls.includes(tab.url)) {
                 urls.push(tab.url);
-            } else {
+            }
+            else {
                 duplicates.push(tab);
                 console.log(tab.url);
             }
