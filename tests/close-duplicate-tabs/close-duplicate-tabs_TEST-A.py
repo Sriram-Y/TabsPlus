@@ -8,7 +8,8 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 
 unpackedExtensionPath = "../../"
-extensionUniqueID = "ijfemcjalnojlefmmhjnmhijfogimnoa"
+# extensionUniqueID will be different for everyone. Change before running.
+extensionUniqueID = "fobdhcgpeflidhhfgifepoiofeilapfj"
 extensionUrl = "chrome-extension://{}/{}".format(extensionUniqueID, "index.html")
 
 chrome_options = Options()
