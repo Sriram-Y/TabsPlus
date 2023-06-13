@@ -14,7 +14,7 @@ unpackedExtensionPath = "../../"
 # Create a new file called unique.py in the test directory of the project.
 # Do not commit unique.py
 extensionUniqueId = EXTENSION_UNIQUE_ID
-extensionUrl = "chrome-extension://{}/{}".format(extensionUniqueID, "index.html")
+extensionUrl = "chrome-extension://{}/{}".format(extensionUniqueId, "index.html")
 
 chrome_options = Options()
 chrome_options.add_argument("--load-extension=" + unpackedExtensionPath);
