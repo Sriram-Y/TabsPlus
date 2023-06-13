@@ -7,9 +7,13 @@ from selenium.webdriver.support import expected_conditions as EC
 
 import time
 
+from unique import EXTENSION_UNIQUE_ID
+
 unpackedExtensionPath = "../../"
 # extensionUniqueID will be different for everyone. Change before running.
-extensionUniqueID = "fobdhcgpeflidhhfgifepoiofeilapfj"
+# Create a new file called unique.py in the test directory of the project.
+# Do not commit unique.py
+extensionUniqueId = EXTENSION_UNIQUE_ID
 extensionUrl = "chrome-extension://{}/{}".format(extensionUniqueID, "index.html")
 
 chrome_options = Options()
