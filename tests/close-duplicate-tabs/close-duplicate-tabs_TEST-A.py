@@ -1,3 +1,11 @@
+###############################################################################
+# Author: Sriram Yadavalli
+# Date: 6-12-2023
+# Description: Test for close duplicate tabs feature. Some tabs in the windows 
+# opened twice. Some are opened once. Expected behavior is that there is a 
+# single instance of the inital tabs remaining.
+###############################################################################
+
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
