@@ -14,8 +14,11 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 import time
+import os
 
 from unique import EXTENSION_UNIQUE_ID
+
+print("\n" + os.path.basename(__file__) + " is running...")
 
 unpackedExtensionPath = "../../"
 # extensionUniqueID will be different for everyone. Change before running.
@@ -100,9 +103,9 @@ for url in actualUrlsInWindow:
     print(url)
 
 if expectedUrlsInWindow == actualUrlsInWindow:
-    print("\nPASS")
+    print("\n*****" + os.path.basename(__file__) + ": PASSED*****")
 else:
-    print("\nFAIL")
+    print("\n*****" + os.path.basename(__file__) + ": FAILED*****")
 
 time.sleep(1)
 driver.quit()
