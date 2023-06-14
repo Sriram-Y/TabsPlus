@@ -2,7 +2,7 @@
 # Author: Sriram Yadavalli
 # Date: 6-12-2023
 # Description: Test for close duplicate tabs feature. Some tabs in the windows 
-# opened twice. Some are opened once. Expected behavior is that there is a 
+# are opened twice. Some are opened once. Expected behavior is that there is a 
 # single instance of the inital tabs remaining.
 ###############################################################################
 
