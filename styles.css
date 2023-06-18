@@ -31,7 +31,7 @@ body {
   margin: 5 px;
   }
 
-   .button {
+  .button {
   width: 130px;
   height: 40px;
   color: #fff;
@@ -51,8 +51,11 @@ body {
   } 
 
   .button {
+<<<<<<< Updated upstream
     width: 130px;
     height: 40px;
+=======
+>>>>>>> Stashed changes
     padding: 0;
     border: none;
     background: rgb(255,27,0);
