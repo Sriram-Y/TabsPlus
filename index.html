@@ -1,46 +1,51 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <title>TabsPlus</title>
     <!-- Chrome API import -->
     <script src="chrome-extension://[extension-id]/js/chrome-api.js"></script>
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
     <!--Add your name here (Doe, John). Separating it by a semicolon-->
-    <meta name="author" content="Yadavalli, Sriram; " />
-    <meta name="author" content="Emamian, Nima; " />
-    <meta name="author" content="Hong, Alex; " />
-    <meta name="author" content="Reed, Matthew; " />
+    <meta name="author" content="Yadavalli, Sriram; ">
+    <meta name="author" content="Emamian, Nima; ">
+    <meta name="author" content="Hong, Alex; ">
+    <meta name="author" content="Reed, Matthew; ">
     <meta name="author" content="Rivera, Ruben; " />
-    <link href="styles.css" rel="stylesheet" type="text/css" />
-  </head>
+    <meta name="author" content="Hernandez, Nicolas " />
+    <link href="styles.css" rel="stylesheet" type="text/css">
+</head>
 
-  <body>
+<body>
+    >>>>>>> main
     <!-- Extension container -->
     <div class="application-container">
-      <h2 class="center-text">TabsPlus</h2>
-      <!-- Feature buttons container -->
-      <div class="button-container">
-        <button id="closeDuplicates" class="button button1">
-          <span>Close Duplicate Tabs</span>
-        </button>
-        <button id="groupsToBookmarksFolder" class="button button2">
-          <span class="test">Create Bookmarks Folder from Group</span>
-        </button>
-        <button id="windowToBookmarksFolder" class="button button3">
-          <span>Create Bookmarks Folder from Window </span>
-        </button>
-        <button id="renameATab" class="button button4">
-          <span>Rename a Tab</span>
-        </button>
-        <button id="sortByDomainName" class="button button5">
-          <span>Sort tabs by domain name</span>
-        </button>
-        <button id="searchAllWindows" class="button button6">
-          <span>Search all windows</span>
-        </button>
-      </div>
+        <h2 class="center-text">TabsPlus</h2>
+        <!-- Feature buttons container -->
+        <div class="button-container">
+            <button id="closeDuplicates" class="button button1">
+                <span>Close Duplicate Tabs</span>
+            </button>
+            <button id="groupsToBookmarksFolder" class="button button2">
+                <span class="test">Create Bookmarks Folder from Group</span>
+            </button>
+            <button id="windowToBookmarksFolder" class="button button3">
+                <span>Create Bookmarks Folder from Window </span>
+            </button>
+            <button id="renameATab" class="button button4">
+                <span>Rename a Tab</span>
+            </button>
+            <button id="sortByDomainName" class="button button5">
+                <span>Sort tabs by domain name</span>
+            </button>
+            <button id="searchAllWindows" class="button button6">
+                <span>Search all windows</span>
+            </button>
+        </div>
     </div>
+</body>
+<!--JS imports-->
+<script type="module" src="js/close-duplicate-tabs.js"></script>
+<script type="module" src="js/create-bookmarks-folder-from-window.js"></script>
 
-    
-  </body>
 </html>
