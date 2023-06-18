@@ -16,7 +16,12 @@ async function closeDuplicateTabs() {
         const allTabsInWindow = await getAllTabsInCurrentWindow();
         
         // Resolving the returned promise to a list of tabObjects
-        var tabObjects = allTabsInWindow.map(tab => ({ id: tab.id, title: tab.title, url: tab.url, groupId: tab.groupId }));
+        var tabObjects = allTabsInWindow.map(tab => ({ 
+            id: tab.id, 
+            title: tab.title, 
+            url: tab.url, 
+            groupId: tab.groupId 
+        }));
 
         // Remove tabObjects with groupId not equal to -1. We only close duplicate tabs that are outside groups.
         tabObjects = tabObjects.filter(tab => tab.groupId === -1);
