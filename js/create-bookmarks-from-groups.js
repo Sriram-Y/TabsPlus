@@ -2,7 +2,7 @@ import { getAllTabsInCurrentWindow } from "./utils.js";
 
 const bookmarkGroupsButton = document.getElementById("groupsToBookmarksFolder");
 const list = document.getElementById("menu-content"); // the list of tab groups that pops out when the button is clicked
-list.style.display = "none";
+
 let listVisible = false;
 let tabGroups = []; // Global Variable for open tab groups
 
@@ -12,6 +12,7 @@ updateTabGroups(); // fetch open tab groups
 function updateTabGroups() {
   chrome.tabGroups.query({}, (groups) => {
     tabGroups = groups; // Update tabGroups array with open tab groups
+    list.style.display = "none";
     console.log(tabGroups);
   });
 }
@@ -53,10 +54,10 @@ function showTabGroups(groups) {
         li.textContent = `GROUP ID: ${group.id} COLOR: ${group.color}`; 
         li.style.cursor = "pointer";
         li.addEventListener("mouseover", () => {
-            li.style.filter = "invert(100%)"; // Invert the colors on mouseover
+            li.style.color = "blue"; // change colors to blue on hover
           });
           li.addEventListener("mouseout", () => {
-            li.style.filter = "none"; // Revert back to original colors on mouseout
+            li.style.color = "black"; // Revert back to original colors on mouseout
           });
         makeBookMarksFolder(li, group); // pass in the list item AND the tab group object
         list.appendChild(li);   
