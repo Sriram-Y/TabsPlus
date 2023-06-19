@@ -1,10 +1,9 @@
 ###############################################################################
 # Author: Sriram Yadavalli
 # Date: 6-14-2023
-# Description: Test for close duplicate tabs feature. A set of urls are opened 
-# in a tab group, the set contains duplicate urls and some singles. The same 
-# set is also opened outside a tab group. Expected behavior is closing only 
-# the duplicates outside the tab group.
+# Description: Test for close duplicate tabs feature. A set of urls with 
+# multiple duplicates is opened. Expected behavior is that there is a 
+# single instance of the inital tabs remaining.
 ###############################################################################
 
 from selenium import webdriver
@@ -30,16 +29,19 @@ extensionUrl = "chrome-extension://{}/{}".format(extensionUniqueId, "index.html"
 
 chrome_options = Options()
 chrome_options.add_argument("--load-extension=" + unpackedExtensionPath);
-# chrome_options.add_argument("--headless=new")
+chrome_options.add_argument("--headless=new")
 
 driver = webdriver.Chrome(options=chrome_options)
 
 # This is where the tabs you want to open will go
 urls = [
-    extensionUrl,
     "https://www.google.com/gmail/about/",
     "https://chat.openai.com/auth/login",
     "https://youtube.com/",
+    "https://youtube.com/",
+    "https://google.com/",
+    "https://google.com/",
+    "https://google.com/",
     "https://google.com/",
     "https://github.com/",
     "https://vscode.dev/"
@@ -59,13 +61,10 @@ expectedUrlsInWindow = [
 # Opening the extension as first tab
 driver.get(extensionUrl)
 
-# Opening all the urls in the url list in separate tabs (inside tab group)
-# Read the JavaScript file
-with open("./open-tabs-in-group_TEST-C.js", "r") as file:
-    openTabsInGroup = file.read()
-
-# Execute the JavaScript code
-driver.execute_async_script(openTabsInGroup)
+# Opening all the urls in the url list in separate tabs
+for url in urls:
+    driver.execute_script("window.open('{}')".format(url))
+    time.sleep(1)
 
 # Feature execution
 # Set the maximum wait time in seconds
