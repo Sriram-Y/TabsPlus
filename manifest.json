@@ -11,6 +11,10 @@
         "Alexander Hong",
         "Matthew Reed"
     ],
+    "icons": {
+        "48": "images/icon48.png",
+        "128": "images/icon128.png"
+      },
     "action": {
         "default_popup": "index.html",
         "default_title": "TabsPlus"
