@@ -1,0 +1,8 @@
+# Ignore __pycache__
+__pycache__
+
+# Ignore unique.py
+unique.py
+
+#Ignore .DS_STORE
+.DS_STORE
