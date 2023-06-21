@@ -10,7 +10,7 @@ body {
   justify-content: center;
   background-color: #e0e5ec;
 	}
-  
+
   .application-container {
   text-align: center;
    margin: 10px;
@@ -32,9 +32,11 @@ body {
   }
 
   .button {
-  width: 130px;
+  width: 140px;
   height: 40px;
   color: #fff;
+  border-color: black;
+  border-width: thin;
   border-radius: 7px;
   margin: 3px;
   padding-top: 50px;
@@ -50,16 +52,14 @@ body {
   outline: none;
   } 
 
-  .button {
-    width: 130px;
-    height: 40px;
+  .button {  
     padding: 0;
-    border: none;
-    background: rgb(255,27,0);
-  background: linear-gradient(0deg, rgba(255,27,0,1) 0%, rgba(251,75,2,1) 100%);
+    background: rgb(0,172,238);
+    background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);
   }
   .button:hover {
-    color: #f0094a;
+    color: rgba(2,126,251,1);
+    border: none;
     background: transparent;
      box-shadow:none;
   }
@@ -71,7 +71,7 @@ body {
     right:0;
     height:2px;
     width:0;
-    background: #f0094a;
+    background: rgba(2,126,251,1);
     box-shadow:
      -1px -1px 5px 0px #fff,
      7px 7px 20px 0px #0003,
@@ -88,7 +88,7 @@ body {
   .button:hover:after{
     width:100%;
     transition:800ms ease all;
-  }
+  }  
 
   
   
