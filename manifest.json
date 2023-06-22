@@ -22,10 +22,14 @@
     "permissions": [
         "tabs",
         "tabGroups",
-        "bookmarks"
+        "bookmarks",
+        "scripting",
+        "storage",
+        "activeTab"
     ],
     "background": {
-        "type": "module"
+        "type": "module",
+        "service_worker" : "./js/background.js"
     },
     "content_scripts": [
         {
@@ -33,7 +37,8 @@
                 "<all_urls>"
             ],
             "js": [
-                "./js/utils.js"
+                "./js/utils.js",
+                "./js/content-script.js"
             ],
             "type": "module"
         }
