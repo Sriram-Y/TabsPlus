@@ -3,7 +3,14 @@
     "version": "0.1",
     "description": "Additional features to enhance chrome tabs and windows",
     "manifest_version": 3,
-
+    "authors": [
+        "Sriram Yadavalli",
+        "Nima Emamian",
+        "Ruben Rivera",
+        "Nicolas Hernandez",
+        "Alexander Hong",
+        "Matthew Reed"
+    ],
     "action": {
         "default_popup": "index.html",
         "default_title": "TabsPlus"
