@@ -1,4 +1,4 @@
-import { getAllTabsInCurrentWindow } from "./utils";
+import { getAllTabsInCurrentWindow } from "./utils.js";
 
 var sortByDomainNameButton = document.getElementById("sortByDomainName");
 
