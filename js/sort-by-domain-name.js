@@ -7,7 +7,7 @@ class TabSorter {
 
     async getTabsByDomain() {
         try {
-            const allTabsInWindow = await chrome.tabs.query({currentWindow: true});
+            const allTabsInWindow = await getAllTabsInCurrentWindow();
             
             // Iterating through the tabs and storing in a map with id and url
             allTabsInWindow.forEach((tab) => {
