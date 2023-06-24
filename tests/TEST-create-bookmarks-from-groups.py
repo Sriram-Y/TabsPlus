@@ -126,6 +126,6 @@ assert testResultSet == urlsSet, "TESTFAIL"
 print("TEST RESULT: PASS - urls match test results")
 
 driver.get("chrome://bookmarks")
-
+time.sleep(5)
 # Close the browser
 driver.quit()
