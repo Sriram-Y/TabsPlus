@@ -27,7 +27,11 @@ bookmarkGroupsDiv.addEventListener("mouseenter", () => {
         
     }
     else {
-        alert("no tab groups open");
+      list.innerHTML = "";
+      toggleList();
+      const li = document.createElement("li"); // create a list item for each open tab groups
+      li.textContent = "No Tab Groups Open"; 
+      list.appendChild(li);   
     }
   })
 });
