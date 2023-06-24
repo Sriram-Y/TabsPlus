@@ -1,4 +1,5 @@
 const bookmarkGroupsButton = document.getElementById("groupsToBookmarksFolder");
+const bookmarkGroupsDiv = document.getElementById("gtbf");
 const list = document.getElementById("menu-content"); // the list of tab groups that pops out when the button is clicked
 
 let listVisible = false;
@@ -15,7 +16,7 @@ function updateTabGroups() {
   });
 }
 
-bookmarkGroupsButton.addEventListener("mouseover", () => {
+bookmarkGroupsDiv.addEventListener("mouseenter", () => {
   chrome.tabGroups.query({}, (groups) => {
     // check for open tab groups
     if (groups.length > 0) { 
@@ -31,7 +32,8 @@ bookmarkGroupsButton.addEventListener("mouseover", () => {
   })
 });
 
-bookmarkGroupsButton.addEventListener("mouseout", () => {
+bookmarkGroupsDiv.addEventListener("mouseleave", () => {
+  list.style.display = "none";
   toggleList();
 });
 
