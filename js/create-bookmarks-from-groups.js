@@ -1,5 +1,3 @@
-import { getAllTabsInCurrentWindow } from "./utils.js";
-
 const bookmarkGroupsButton = document.getElementById("groupsToBookmarksFolder");
 const list = document.getElementById("menu-content"); // the list of tab groups that pops out when the button is clicked
 
@@ -17,7 +15,7 @@ function updateTabGroups() {
   });
 }
 
-bookmarkGroupsButton.addEventListener("click", () => {
+bookmarkGroupsButton.addEventListener("mouseover", () => {
   chrome.tabGroups.query({}, (groups) => {
     // check for open tab groups
     if (groups.length > 0) { 
@@ -31,6 +29,10 @@ bookmarkGroupsButton.addEventListener("click", () => {
         alert("no tab groups open");
     }
   })
+});
+
+bookmarkGroupsButton.addEventListener("mouseout", () => {
+  toggleList();
 });
 
 function toggleList() {
