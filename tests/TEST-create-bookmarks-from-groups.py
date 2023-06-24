@@ -4,6 +4,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from unique import extensionId
 from selenium.webdriver.common.alert import Alert
+from selenium.webdriver.common.action_chains import ActionChains
 
 # Set the path to your ChromeDriver executable
 webdriver_service = Service('/usr/local/bin/chromedriver')
@@ -21,7 +22,7 @@ driver = webdriver.Chrome(service=webdriver_service, options=chrome_options)
 
 
 # navigate to extension 
-driver.get('chrome-extension://pelllebfeloappccljohafhdjpdffokj/index.html')
+driver.get('chrome-extension://kjdkhbloaajgmkmcppnfnhjoedkddhpb/index.html')
 
 
 ## Input URLs ##
@@ -60,7 +61,8 @@ time.sleep(1)
 
 # Find and click feature button
 button = driver.find_element(By.ID, "groupsToBookmarksFolder")
-button.click()
+actions = ActionChains(driver)
+actions.move_to_element(button).perform()
 
 time.sleep(1)
 
