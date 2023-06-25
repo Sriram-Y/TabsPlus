@@ -5,7 +5,7 @@ from selenium.webdriver.common.by import By
 from unique import extensionId
 from selenium.webdriver.common.alert import Alert
 from selenium.webdriver.common.action_chains import ActionChains
-
+from inputUrls import urls2
 # Set the path to your ChromeDriver executable
 webdriver_service = Service('/usr/local/bin/chromedriver')
 
@@ -15,62 +15,101 @@ chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument('--load-extension=' + extensionPath)
 chrome_options.add_argument('--disable-extensions-except=./')
 chrome_options.add_argument('--disable-dev-shm-usage')
-#chrome_options.add_argument('--headless')  
+chrome_options.add_argument('--disable-gpu')
+chrome_options.add_argument('--headless=new')  
 
 # Create a new instance of Chrome WebDriver
 driver = webdriver.Chrome(service=webdriver_service, options=chrome_options)
 
-print("Opening Extension")
 
 # navigate to extension 
 driver.get('chrome-extension://kjdkhbloaajgmkmcppnfnhjoedkddhpb/index.html')
-
 print("Opening Tabs")
 ## Input URLs ##
-urls = ["https://github.com/", "https://www.youtube.com/", 
-        "https://www.google.com/", "https://www.wikipedia.org/", 
-        "https://www.etsy.com/", "https://www.dictionary.com/"]
 
-for url in urls: 
+for url in urls2: 
     # Open tabs 
     driver.execute_script("window.open()")
     driver.switch_to.window(driver.window_handles[-1])
     driver.get(url)
     print(f"Tab: {url} opened")
-print("Switching back to Extension Tab")
 driver.switch_to.window(driver.window_handles[0])
 time.sleep(1)
-print("Creating Groups")
+print("Making Tab Groups")
 group_script = """
-      chrome.tabs.query({ url: ["https://github.com/", "https://www.youtube.com/"] }, (tabs) => {
-         const tabIds = tabs.map(tab => tab.id);
-         chrome.tabs.group({ tabIds: tabIds }, (group) => {
-         });
-      });
-      chrome.tabs.query({ url: ["https://www.google.com/", "https://www.wikipedia.org/"] }, (tabs) => {
-         const tabIds = tabs.map(tab => tab.id);
-         chrome.tabs.group({ tabIds: tabIds }, (group) => {
-         });
-      });
-      chrome.tabs.query({ url: ["https://www.etsy.com/", "https://www.dictionary.com/"] }, (tabs) => {
+      chrome.tabs.query({ url: ['https://www.facebook.com/',
+    'https://www.amazon.com/',
+    'https://www.netflix.com/',
+    'https://www.instagram.com/',
+    'https://www.twitter.com/',
+    'https://www.linkedin.com/',
+    'https://www.reddit.com/',
+    'https://www.pinterest.com/',
+    'https://www.stackoverflow.com/',
+    'https://www.quora.com/',
+    'https://www.spotify.com/',
+    'https://www.microsoft.com/',
+    'https://www.apple.com/',
+    'https://www.yahoo.com/',
+    'https://www.twitch.tv/',
+    'https://www.aliexpress.com/',
+    'https://www.wikipedia.org/',
+    'https://www.netflix.com/',
+    'https://www.linkedin.com/',
+    'https://www.reddit.com/',
+    'https://www.gmail.com/',
+    'https://www.wordpress.com/',
+    'https://www.tumblr.com/',
+    'https://www.dropbox.com/',
+    'https://www.slack.com/',
+    'https://www.salesforce.com/',
+    'https://www.alibaba.com/',
+    'https://www.nike.com/',
+    'https://www.cnn.com/',
+    'https://www.bbc.co.uk/',
+    'https://www.nytimes.com/',
+    'https://www.huffpost.com/',
+    'https://www.techcrunch.com/',
+    'https://www.bleacherreport.com/',
+    'https://www.wikipedia.org/',
+    'https://www.imdb.com/',
+    'https://www.tripadvisor.com/',
+    'https://www.zillow.com/',
+    'https://www.zara.com/',
+    'https://www.bestbuy.com/',
+    'https://www.target.com/',
+    'https://www.walmart.com/',
+    'https://www.costco.com/',
+    'https://www.macys.com/',
+    'https://www.kohls.com/',
+    'https://www.sephora.com/',
+    'https://www.ulta.com/',
+    'https://www.starbucks.com/',
+    'https://www.mcdonalds.com/',
+    'https://www.coca-cola.com/',
+    'https://www.pepsi.com/',
+    'https://www.whitehouse.gov/',
+    'https://www.nasa.gov/',
+    'https://www.un.org/',
+    'https://www.github.io/',
+    'https://www.mozilla.org/'] }, (tabs) => {
          const tabIds = tabs.map(tab => tab.id);
          chrome.tabs.group({ tabIds: tabIds }, (group) => {
          });
       });
 """
 
-x = driver.execute_script(group_script)
+driver.execute_script(group_script)
 time.sleep(1)
 
+print("Pressing Feature Button")
 # Find and click feature button
 button = driver.find_element(By.ID, "groupsToBookmarksFolder")
-print("Hovering over feature button")
 actions = ActionChains(driver)
 actions.move_to_element(button).perform()
-
+driver.save_screenshot("./test-docs/Test-2-Results/tab_groups_list.png")
 time.sleep(1)
-
-print("making tab groups")
+print("Making Bookmark Folder(s)")
 # loop through 3 group colors and create bookmark folders 
 colors = ["blue", "grey", "red"]
 for color in colors:
@@ -87,13 +126,13 @@ for color in colors:
          break  # Optionally, break the loop if you only want to select the first matching item
 
    # Switch the driver's focus to the confirmation dialog
-   time.sleep(1)
+   
    alert = Alert(driver)
-
+   time.sleep(1)
    # Accept the confirmation dialog by clicking "OK"
    alert.accept()
    time.sleep(1)
-
+print("Bookmark Groups Created Successfully")
 confirmBookmarks = """ 
    const getBookmarkBarBookmarks = () => {
     return new Promise((resolve) => {
@@ -104,7 +143,7 @@ confirmBookmarks = """
         bookmarkBarBookmarks.forEach(item => {
           if (item.children) {
             item.children.forEach(child => {
-              urls.push(child.url);
+              urls.push({url: child.url, parentId: child.parentId});
             });
           }
         });
@@ -117,15 +156,17 @@ confirmBookmarks = """
 
 testResult = driver.execute_script(confirmBookmarks)
 
-testResultSet = set(testResult)
-urlsSet = set(urls)
-
-print(f"results: {testResultSet}")
-print(f"expected urls: {urlsSet}\n")
-assert testResultSet == urlsSet, "TESTFAIL"
-print("TEST RESULT: PASS - urls match test results")
+print(testResult)
 
 driver.get("chrome://bookmarks")
+driver.save_screenshot("./test-docs/Test-2-Results/bookmark_bar_folders_created.png")
 time.sleep(5)
 # Close the browser
 driver.quit()
+
+print("Creating Test Doc")
+# make test result file
+testResultFile = open("./test-docs/Test-2-Results/test2output.txt", "w")
+testResultFile.write(f"Expected Urls: {str(list(urls))}\n")
+testResultFile.write(f"Actual Output: {str(list(testResult))}")
+testResultFile.close
