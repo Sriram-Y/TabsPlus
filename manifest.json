@@ -24,9 +24,6 @@
         "tabGroups",
         "bookmarks"
     ],
-    "background": {
-        "type": "module"
-    },
     "content_scripts": [
         {
             "matches": [
