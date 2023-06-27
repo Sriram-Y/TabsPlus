@@ -69,12 +69,14 @@ function showTabGroups(groups) {
           li.style.color = "black"; // Revert back to original colors on mouseout
           //subList.style.display = "none";
         });
-        li.addEventListener("mouseenter", () => {
-          subList.style.display = "block";
-          subList.innerHTML = "";
-          fetchTitles(group, subList);
-          li.appendChild(subList);
-        });
+        
+        // has formatting issues
+        // li.addEventListener("mouseenter", () => { 
+        //   subList.style.display = "block";
+        //   subList.innerHTML = "";
+        //   fetchTitles(group, subList);
+        //   li.appendChild(subList);
+        // });
         makeBookMarksFolder(li, group); // pass in the list item AND the tab group object
         list.appendChild(li);  
         
@@ -105,29 +107,31 @@ function makeBookMarksFolder(item, group) {
     
     })
 }
+// Display URLs in a sub-sub menu 
+// Has formatting issues and will warp the dimensions of the extension
 
-function fetchTitles(group, item) {
-  chrome.bookmarks.search({}, (bookmarks) => {
-    console.log(bookmarks);
-    var parentId = "";
-    var urls = [];
-      for (const entry of bookmarks) {
-        if (entry.title.includes(group.id)) {
-            parentId = entry.id;
-            console.log(entry.id);
-        }
+// function fetchTitles(group, item) {
+//   chrome.bookmarks.search({}, (bookmarks) => {
+//     console.log(bookmarks);
+//     var parentId = "";
+//     var urls = [];
+//       for (const entry of bookmarks) {
+//         if (entry.title.includes(group.id)) {
+//             parentId = entry.id;
+//             console.log(entry.id);
+//         }
         
-      }
-      for (const entry of bookmarks) {
-        if (entry.parentId == parentId) {
-          urls.push(entry.url);
-        }
-      }
-      console.log(urls);
-      for (const url of urls) {
-        const li = document.createElement("li");
-        li.textContent = url;
-        item.appendChild(li);
-      }
-  });
-}
+//       }
+//       for (const entry of bookmarks) {
+//         if (entry.parentId == parentId) {
+//           urls.push(entry.url);
+//         }
+//       }
+//       console.log(urls);
+//       for (const url of urls) {
+//         const li = document.createElement("li");
+//         li.textContent = url;
+//         item.appendChild(li);
+//       }
+//   });
+// }
