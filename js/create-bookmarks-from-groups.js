@@ -1,5 +1,4 @@
 const bookmarkGroupsButton = document.getElementById("groupsToBookmarksFolder");
-const bookmarkGroupsDiv = document.getElementById("gtbf");
 const list = document.getElementById("menu-content"); // the list of tab groups that pops out when the button is clicked
 
 let listVisible = false;
@@ -16,7 +15,8 @@ function updateTabGroups() {
   });
 }
 
-bookmarkGroupsDiv.addEventListener("mouseenter", () => {
+// Event Listener for Hover Functionality of Feature Button
+bookmarkGroupsButton.addEventListener("mouseenter", () => {
   chrome.tabGroups.query({}, (groups) => {
     // check for open tab groups
     if (groups.length > 0) {  
@@ -25,61 +25,60 @@ bookmarkGroupsDiv.addEventListener("mouseenter", () => {
         tabGroups = groups;
     }
     else {
+      // alert the user if there are no open tab groups
       list.innerHTML = "";
       toggleList();
-      const li = document.createElement("li"); // create a list item for each open tab groups
+      const li = document.createElement("li"); 
       li.textContent = "No Tab Groups Open"; 
       list.appendChild(li);   
     }
   })
 });
 
-bookmarkGroupsDiv.addEventListener("mouseleave", () => {
+
+// Hide the Sublist on mouse out
+list.addEventListener("mouseleave", () => {
   list.style.display = "none";
-  toggleList();
+  //toggleList();
 });
 
+// turn the list display on and off
 function toggleList() {
-    // toggle the visibility of the tabs groups with the groupsToBookmarksFolder button
+    // toggle the visibility of the tabs groups sublist
     if (!listVisible){
         list.style.display = "block";      
         listVisible = true;
     }
     else {
-        // hide the list of tab groups when the button is pressed 
+        // hide the sublist of tab groups 
         list.style.display = "none";
         listVisible = false;
     }
 }
 
+// create li for each open tab group and add it to the sublist
 function showTabGroups(groups) {
     list.innerHTML = "";
     // create list items for each tab group
     for (const group of groups) {
-        const li = document.createElement("li"); // create a list item for each open tab groups
-        li.textContent = `GROUP ID: ${group.id} COLOR: ${group.color}`; 
+        const li = document.createElement("li"); 
+        li.textContent = `GROUP ID: ${group.title} COLOR: ${group.color}`; 
+        if (!group.title == "") {
+          li.textContent = `${group .title}`; 
+        }
+        else {
+          li.textContent = `group id: ${group.id} color: ${group.color}`
+        }
         li.style.cursor = "pointer";
-        const subList = document.createElement("ul");
-        subList.innerHTML = "";
         li.addEventListener("mouseover", () => {
           li.style.color = "blue"; // change colors to blue on hover
-          
         });
         li.addEventListener("mouseout", () => {
           li.style.color = "black"; // Revert back to original colors on mouseout
           //subList.style.display = "none";
-        });
-        
-        // has formatting issues
-        // li.addEventListener("mouseenter", () => { 
-        //   subList.style.display = "block";
-        //   subList.innerHTML = "";
-        //   fetchTitles(group, subList);
-        //   li.appendChild(subList);
-        // });
+        });        
         makeBookMarksFolder(li, group); // pass in the list item AND the tab group object
         list.appendChild(li);  
-        
     }
 }
 
@@ -107,31 +106,4 @@ function makeBookMarksFolder(item, group) {
     
     })
 }
-// Display URLs in a sub-sub menu 
-// Has formatting issues and will warp the dimensions of the extension
 
-// function fetchTitles(group, item) {
-//   chrome.bookmarks.search({}, (bookmarks) => {
-//     console.log(bookmarks);
-//     var parentId = "";
-//     var urls = [];
-//       for (const entry of bookmarks) {
-//         if (entry.title.includes(group.id)) {
-//             parentId = entry.id;
-//             console.log(entry.id);
-//         }
-        
-//       }
-//       for (const entry of bookmarks) {
-//         if (entry.parentId == parentId) {
-//           urls.push(entry.url);
-//         }
-//       }
-//       console.log(urls);
-//       for (const url of urls) {
-//         const li = document.createElement("li");
-//         li.textContent = url;
-//         item.appendChild(li);
-//       }
-//   });
-// }

@@ -16,7 +16,7 @@ chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument('--load-extension=' + extensionPath)
 chrome_options.add_argument('--disable-extensions-except=./')
 chrome_options.add_argument('--disable-dev-shm-usage')
-chrome_options.add_argument('--headless=new')  
+#chrome_options.add_argument('--headless=new')  
 
 # Create a new instance of Chrome WebDriver
 driver = webdriver.Chrome(service=webdriver_service, options=chrome_options)
@@ -84,6 +84,7 @@ for color in colors:
    alert = Alert(driver)
 
    # Accept the confirmation dialog by clicking "OK"
+   time.sleep(1)
    alert.accept()
    time.sleep(1)
 print("Bookmark Groups Created Successfully")
