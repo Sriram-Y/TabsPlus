@@ -6,7 +6,6 @@ export async function getAllTabsInCurrentWindow() {
     return allTabsInWindow;
 }
 
-<<<<<<< Updated upstream
 export async function getAllTabGroupsInCurrentWindow() {
     const allTabGroupsInCurrentWindow = chrome.tabGroups.query({});
 
@@ -43,6 +42,3 @@ export async function getTabGroupTitles() {
     console.log("%c" + tabGroupTitlesList, "color: red;");
     return tabGroupTitlesList;
 }
-=======
-
->>>>>>> Stashed changes
