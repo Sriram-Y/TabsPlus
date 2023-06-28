@@ -21,7 +21,6 @@ chrome_options.add_argument('--disable-dev-shm-usage')
 # Create a new instance of Chrome WebDriver
 driver = webdriver.Chrome(service=webdriver_service, options=chrome_options)
 
-
 # navigate to extension 
 driver.get('chrome-extension://kjdkhbloaajgmkmcppnfnhjoedkddhpb/index.html')
 print("Opening Tabs")
@@ -38,12 +37,13 @@ print("Making Tab Groups")
 group_script = """
       chrome.tabs.query({ url: ["https://github.com/", "https://www.youtube.com/"] }, (tabs) => {
          const tabIds = tabs.map(tab => tab.id);
-         chrome.tabs.group({ tabIds: tabIds }, (group) => {
+         chrome.tabs.group({ tabIds: tabIds }, (group) => { 
          });
       });
       chrome.tabs.query({ url: ["https://www.google.com/", "https://www.wikipedia.org/"] }, (tabs) => {
          const tabIds = tabs.map(tab => tab.id);
          chrome.tabs.group({ tabIds: tabIds }, (group) => {
+            
          });
       });
       chrome.tabs.query({ url: ["https://www.etsy.com/", "https://www.dictionary.com/"] }, (tabs) => {
@@ -61,7 +61,7 @@ print("Pressing Feature Button")
 button = driver.find_element(By.ID, "groupsToBookmarksFolder")
 actions = ActionChains(driver)
 actions.move_to_element(button).perform()
-driver.save_screenshot("./test-docs/Test-1-Results/tab_groups_list.png")
+driver.save_screenshot("./tests/create-bookmarks-from-groups/test1results/TEST1tab_groups_list.png")
 time.sleep(1)
 print("Making Bookmark Folder(s)")
 # loop through 3 group colors and create bookmark folders 
@@ -71,22 +71,16 @@ for color in colors:
    list_items = driver.find_elements(By.TAG_NAME, "li")
 
    # Iterate through each list item
-   for item in list_items:
-      
+   for item in list_items:   
       # Check if the item's text content contains the word "blue"
       if color in item.text:
          # Perform the desired action on the list item (e.g., click on it)
          item.click()
-         break  # Optionally, break the loop if you only want to select the first matching item
-
-   # Switch the driver's focus to the confirmation dialog
+         prompt = Alert(driver)
+         prompt.send_keys(color)
+         prompt.accept()
    time.sleep(1)
-   alert = Alert(driver)
-
-   # Accept the confirmation dialog by clicking "OK"
-   time.sleep(1)
-   alert.accept()
-   time.sleep(1)
+   
 print("Bookmark Groups Created Successfully")
 confirmBookmarks = """ 
    const getBookmarkBarBookmarks = () => {
@@ -111,17 +105,15 @@ confirmBookmarks = """
 
 testResult = driver.execute_script(confirmBookmarks)
 
-print(testResult)
+for result in testResult:
+   print(result)
 
 driver.get("chrome://bookmarks")
-driver.save_screenshot("./test-docs/Test-1-Results/bookmark_bar_folders_created.png")
-time.sleep(5)
+driver.save_screenshot("./tests/create-bookmarks-from-groups/test1results/TEST1bookmark_bar_folders_created.png")
 # Close the browser
 driver.quit()
 
-print("Creating Test Doc")
-# make test result file
-testResultFile = open("./test-docs/Test-1-Results/test1output.txt", "w")
-testResultFile.write(f"Expected Urls: {str(list(urls))}\n")
-testResultFile.write(f"Actual Output: {str(list(testResult))}")
-testResultFile.close
+file = open("./tests/create-bookmarks-from-groups/test1results/test1output", "w")
+file.write((str(list(urls))) + "\n")
+file.write(str(list(testResult)))
+file.close()
