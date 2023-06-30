@@ -12,10 +12,9 @@ export async function getAllTabGroupsInCurrentWindow() {
     return allTabGroupsInCurrentWindow;
 }
 
-const allTabsInCurrentWindow = await getAllTabsInCurrentWindow();
-const allTabGroupsInCurrentWindow = await getAllTabGroupsInCurrentWindow();
+export async function getTabIds() {
+    const allTabsInCurrentWindow = await getAllTabsInCurrentWindow();
 
-export async function getTabIds() {  // Used for getting a specific tab
     var tabIdsList = allTabsInCurrentWindow.map(tab => tab.id);
     
     console.log("%c" + tabIdsList, "color: red;");
@@ -23,6 +22,8 @@ export async function getTabIds() {  // Used for getting a specific tab
 }
 
 export async function getTabTitles() {
+    const allTabsInCurrentWindow = await getAllTabsInCurrentWindow();
+
     var tabTitlesList = allTabsInCurrentWindow.map(tab => tab.title);
 
     console.log("%c" + tabTitlesList, "color: red;");
@@ -30,6 +31,8 @@ export async function getTabTitles() {
 }
 
 export async function getTabGroupIds() {
+    const allTabGroupsInCurrentWindow = await getAllTabGroupsInCurrentWindow();
+
     var tabGroupIdsList = allTabGroupsInCurrentWindow.map(tabGroup => tabGroup.id);
 
     console.log("%c" + tabGroupIdsList, "color: red;");
@@ -37,8 +40,24 @@ export async function getTabGroupIds() {
 }
 
 export async function getTabGroupTitles() {
+    const allTabGroupsInCurrentWindow = await getAllTabGroupsInCurrentWindow();
+
     var tabGroupTitlesList = allTabGroupsInCurrentWindow.map(tabGroup => tabGroup.title);
 
     console.log("%c" + tabGroupTitlesList, "color: red;");
     return tabGroupTitlesList;
+}
+
+export async function getTabTitleFromTabId(tabId) {
+    var tabObject = await chrome.tabs.get(tabId);
+
+    console.log("%c" + tabObject.title, "color: red;");
+    return tabObject.title;
+}
+
+export async function getTabGroupTitleFromTabGroupId(tabGroupId) {
+    var tabGroupObject = await chrome.tabGroups.get(tabGroupId);
+
+    console.log("%c" + tabGroupObject.title, "color: red;");
+    return tabGroupObject.title;
 }
