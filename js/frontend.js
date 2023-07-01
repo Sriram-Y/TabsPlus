@@ -1,6 +1,10 @@
 
 import { getTabIds, getTabTitles, getTabGroupTitles } from './utils.js';
 
+function renameTab(newTitle) {
+  document.title = newTitle;
+}
+
 function createMainMenu() {
   const mainMenu = document.getElementById('rename-tab');
   
