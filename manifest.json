@@ -23,9 +23,11 @@
         "tabs",
         "tabGroups",
         "bookmarks",
-        "scripting",
-        "storage",
-        "activeTab"
+        "scripting"
+    ],
+    "host_permissions": [
+        "http://*/*",
+        "https://*/*"
     ],
     "content_scripts": [
         {
