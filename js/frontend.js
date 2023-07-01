@@ -1,13 +1,11 @@
+import {  getTabIds, getTabTitles, getTabGroupTitles } from './utils.js';
+import { renameTab } from './rename-tab.js';
 
-import { getTabIds, getTabTitles, getTabGroupTitles } from './utils.js';
 
-function renameTab(newTitle) {
-  document.title = newTitle;
-}
 
 function createMainMenu() {
   const mainMenu = document.getElementById('rename-tab');
-  
+
   getTabTitles()
     .then(tabTitlesList => {
       tabTitlesList.forEach((title, index) => {
@@ -18,17 +16,9 @@ function createMainMenu() {
           getTabIds()
           .then(tabIdsList => {
             const specificTabId = tabIdsList[index];
-            chrome.scripting.executeScript({
-                // Set current tab as target
-                target : {tabId : specificTabId},
-                // Inject renameTab func
-                func: renameTab,
-                // Pass in newTitle as arg
-                args: [ newTitle ]
-            });
+            renameTab(newTitle, specificTabId);
             menuItem.textContent = newTitle;
-            console.log("new title: " + newTitle);
-          })
+          });
         });
         mainMenu.appendChild(menuItem);
       });
@@ -86,8 +76,3 @@ groupTab.addEventListener('mouseover', () => {
   buttonContainer.addEventListener('mouseleave', () => {
     groupMenu.style.display = 'none';
 });
-
-
-
-
-
