@@ -35,8 +35,7 @@
                 "<all_urls>"
             ],
             "js": [
-                "./js/utils.js",
-                "./js/content-script.js"
+                "./js/utils.js"
             ],
             "type": "module"
         }
