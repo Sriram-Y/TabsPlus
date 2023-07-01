@@ -27,10 +27,6 @@
         "storage",
         "activeTab"
     ],
-    "background": {
-        "type": "module",
-        "service_worker" : "./js/background.js"
-    },
     "content_scripts": [
         {
             "matches": [

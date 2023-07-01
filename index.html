@@ -21,19 +21,30 @@
     <div class="application-container">
       <h2 class="center-text">TabsPlus</h2>
       <!-- Feature buttons container -->
-      <div class="button-container">
+      <div id="button-container" class="button-container">
         <button id="closeDuplicates" class="button button1">
           Close Duplicate Tabs
         </button>
-        <button id="groupsToBookmarksFolder" class="button button2">
-          Create Bookmarks Folder from Group
-        </button>
-        <ul id="menu-content">
-        </ul>
+        <div id="groupBookmarkContainer">
+          <button id="groupsToBookmarksFolder" class="button button2">
+            Create Bookmarks Folder from Group
+          </button>
+          <div id="main-menu" class="button button2">
+            
+          </div>
+          <div id="menu-content">
+          </div>
+        </div>
         <button id="windowToBookmarksFolder" class="button button3">
           Create Bookmarks Folder from Window
         </button>
         <button id="renameATab" class="button button4">Rename a Tab</button>
+        <div id="rename-tab" class="rename-tab">
+          
+        </div>
+        <div id="rename" class="rename">
+          
+        </div>
         <button id="sortByDomainName" class="button button5">
           Sort tabs by domain name
         </button>
@@ -48,5 +59,7 @@
 <script type="module" src="js/close-duplicate-tabs.js"></script>
 <script type="module" src="js/create-bookmarks-folder-from-window.js"></script>
 <script type="module" src="js/create-bookmarks-from-groups.js"></script>
-<script type="module" src="js/index.js"></script>
+<script type="module" src="js/frontend.js"></script>
+
+
 </html>
