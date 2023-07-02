@@ -22,7 +22,12 @@
     "permissions": [
         "tabs",
         "tabGroups",
-        "bookmarks"
+        "bookmarks",
+        "scripting"
+    ],
+    "host_permissions": [
+        "http://*/*",
+        "https://*/*"
     ],
     "content_scripts": [
         {

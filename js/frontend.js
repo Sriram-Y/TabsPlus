@@ -1,28 +1,32 @@
+import {  getTabIds, getTabTitles, getTabGroupTitles } from './utils.js';
+import { renameTab } from './rename-tab.js';
 
-import { getTabTitles } from './utils.js';
-import { getTabGroupTitles } from './utils.js';
+
 
 function createMainMenu() {
-    const mainMenu = document.getElementById('rename-tab');
-    
-  
-    getTabTitles()
-      .then(tabTitlesList => {
-        tabTitlesList.forEach(title => {
-          const menuItem = document.createElement('h5');
-          menuItem.textContent = title;
-          menuItem.addEventListener('click', () => {
-            // Add your logic here for handling the click event
-            console.log('it works')
+  const mainMenu = document.getElementById('rename-tab');
+
+  getTabTitles()
+    .then(tabTitlesList => {
+      tabTitlesList.forEach((title, index) => {
+        const menuItem = document.createElement('h5');
+        menuItem.textContent = title;
+        menuItem.addEventListener('click', () => {
+          const newTitle = prompt("Rename Tab: ");
+          getTabIds()
+          .then(tabIdsList => {
+            const specificTabId = tabIdsList[index];
+            renameTab(newTitle, specificTabId);
+            menuItem.textContent = newTitle;
           });
-          mainMenu.appendChild(menuItem);
         });
-      })
-      .catch(error => {
-        console.error(error);
+        mainMenu.appendChild(menuItem);
       });
-  
-  }
+    })
+    .catch(error => {
+      console.error(error);
+    });
+}
   
 createMainMenu();
 
@@ -72,8 +76,3 @@ groupTab.addEventListener('mouseover', () => {
   buttonContainer.addEventListener('mouseleave', () => {
     groupMenu.style.display = 'none';
 });
-
-
-
-
-
