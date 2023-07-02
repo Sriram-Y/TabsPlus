@@ -1,26 +1,38 @@
-
 import {  getTabIds, getTabTitles, getTabGroupTitles, getAllTabGroupsInCurrentWindow } from './utils.js';
 import { renameTab } from './rename-tab.js';
 import { makeBookmarksFolder } from './create-bookmarks-from-groups.js';
 
-
+// Creates a main menu for renaming tabs.
+// It retrieves tab titles and tab IDs, and allows the user to rename each tab by clicking on the menu items.
 function createMainMenu() {
+  // Get the main menu element with the ID 'rename-tab'
   const mainMenu = document.getElementById('rename-tab');
 
+  // Retrieve tab titles using the getTabTitles function
   getTabTitles()
     .then(tabTitlesList => {
+      // Iterate over the tab titles
       tabTitlesList.forEach((title, index) => {
+        // Create a new menu item element
         const menuItem = document.createElement('h5');
+        // Set the text content of the menu item to the current tab title
         menuItem.textContent = title;
+        // Add a click event listener to the menu item
         menuItem.addEventListener('click', () => {
+          // Prompt the user to enter a new title for the tab
           const newTitle = prompt("Rename Tab: ");
+          // Retrieve tab IDs using the getTabIds function
           getTabIds()
           .then(tabIdsList => {
+            // Get the specific tab ID based on the current index
             const specificTabId = tabIdsList[index];
+            // Call the renameTab function to rename the tab with the new title
             renameTab(newTitle, specificTabId);
+            // Update the text content of the menu item to the new title
             menuItem.textContent = newTitle;
           });
         });
+        // Append the menu item to the main menu
         mainMenu.appendChild(menuItem);
       });
     })
@@ -28,7 +40,8 @@ function createMainMenu() {
       console.error(error);
     });
 }
-  
+
+// Call the createMainMenu function to create the main menu for renaming tabs
 createMainMenu();
 
 function tabGroupsTitle() {
