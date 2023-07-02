@@ -89,3 +89,48 @@ body {
     width:100%;
     transition:800ms ease all;
   }  
+
+ #main-menu {
+  display: none;
+ }  
+
+ .sub-menu {
+  display: none;
+ }
+
+ .sub-menu h5{
+  padding-left: 0px;
+  margin-top: 2px;
+  margin-left: 3px;
+ }
+
+ #rename-tab{
+  padding-left: 0px;
+ }
+
+ #rename-tab {
+  display: none;
+  margin: 2px 2px 2px 2px;
+  text-align: left;
+ }
+
+ .rename{
+  display: none;
+ }
+
+ #main-menu{
+  /* display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  list-style: none;
+  padding: 0;
+  margin-left: 3px; */
+  
+  }
+
+  #main-menu h5{
+  margin: 2px 2px 2px 2px;
+  padding: 2px;
+
+  }
+
