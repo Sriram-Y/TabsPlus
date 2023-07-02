@@ -22,7 +22,18 @@
     "permissions": [
         "tabs",
         "tabGroups",
-        "bookmarks"
+        "bookmarks",
+        "scripting",
+        "search"
+    ],
+    "host_permissions": [
+        "<all_urls>"
+    ],
+    "optional_permissions": [
+        "<all_urls>"
+    ],
+    "optional_host_permissions": [
+        "<all_urls>"
     ],
     "content_scripts": [
         {
@@ -30,7 +41,12 @@
                 "<all_urls>"
             ],
             "js": [
-                "./js/utils.js"
+                "js/frontend.js", 
+                "js/utils.js",
+                "js/close-duplicate-tabs.js", 
+                "js/create-bookmarks-folder-from-window.js", 
+                "js/create-bookmarks-from-groups.js",
+                "js/search-all-windows.js"
             ],
             "type": "module"
         }
