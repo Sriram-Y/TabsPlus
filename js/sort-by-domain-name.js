@@ -33,7 +33,10 @@ sortByDomainNameButton.addEventListener("click", async function() {
 async function sortTabsByDomain() {
     try {
         // Get all the tabs in the current window. This is an asynchronous operation, so we wait for it to complete.
-        const allTabsInWindow = await getAllTabsInCurrentWindow();
+        var allTabsInWindow = await getAllTabsInCurrentWindow();
+
+        // Remove tabObjects with groupId not equal to -1. We only close duplicate tabs that are outside groups.
+        allTabsInWindow = allTabsInWindow.filter(tab => tab.groupId === -1);
 
         // Create a new map to store the tabs by their domain name.
         let tabMap = new Map();
