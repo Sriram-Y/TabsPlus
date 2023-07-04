@@ -37,10 +37,16 @@ searchAllWindowsButton.addEventListener("click", async function () {
                     await getTabTitleFromTabId(id).then(async function (result) {
                         const listItem = document.createElement("li");
                         listItem.id = "tab-item";
+                        listItem.onmouseover = function () {
+                            listItem.style.color = "blue";
+                        };
+                        listItem.onmouseout = function () {
+                            listItem.style.color = "";
+                        };
                         listItem.textContent = result;
-                        listItem.addEventListener("click", async function () {
+                        listItem.addEventListener("click", function () {
                             // await moveAndFind(id, searchString);
-                            await chrome.runtime.sendMessage({
+                            chrome.runtime.sendMessage({
                                 message: [id, searchString]
                             });
                         });
@@ -51,6 +57,7 @@ searchAllWindowsButton.addEventListener("click", async function () {
             else {
                 const listItem = document.createElement("li");
                 listItem.id = "tab-item";
+                listItem.style.color = "red";
                 listItem.textContent = "No results for the search term were found.";
 
                 menuItemsElement.appendChild(listItem);
