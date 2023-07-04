@@ -2,65 +2,51 @@ chrome.runtime.onMessage.addListener(async function (message) {
     const [id, searchString] = message.message;
     console.log("Received data:", id, searchString);
     await move(id, searchString);
-    // find(searchString);
 });
 
 async function move(tabId, searchString) {
-    // areAllTabsLoaded(async function (loaded) {
-    //     if (loaded) {
-    //         // Move
-    //         chrome.tabs.query({}, function (tabs) {
-    //             for (var i = 0; i < tabs.length; i++) {
-    //                 if (tabs[i].id === tabId) {
-    //                     chrome.tabs.update(tabId, { active: true });
-    //                     break;
-    //                 }
-    //             }
-    //         });
-    //     }
+    const moveComplete = await chrome.tabs.update(tabId, { active: true });
+    await moveComplete;
+    console.log("Move Complete:", moveComplete);
+
+    // Simulating find operation on page
+    // const injectionResults = await chrome.scripting.executeScript({
+    //     target: { tabId: tabId, allFrames: true },
+    //     func: simulateCtrlF,
     // });
-
-    // var loaded = areAllTabsLoaded();
-    // await loaded;
-    // if (loaded) {
-        // Move
-        // chrome.tabs.query({}, function (tabs) {
-        //     for (var i = 0; i < tabs.length; i++) {
-        //         if (tabs[i].id === tabId) {
-
-        //             break;
-        //         }
-        //     }
-        // });
-        chrome.tabs.update(tabId, { active: true });
+    // for (const { frameId, result } of injectionResults) {
+    //     console.log(`Frame ${frameId} Result:`, result, "Tab ID:", tabId);
     // }
 }
 
-async function areAllTabsLoaded() {
-    var allTabsLoaded = false;
-    // await chrome.windows.getCurrent({ populate: true }, async function (window) {
-    //     await chrome.tabs.query({ windowId: window.id }, async function (tabs) {
-    //         allTabsLoaded = true;
+// function simulateCtrlF() {
+//     // Create a new KeyboardEvent for the Command key
+//     const cmdKeyDown = new KeyboardEvent('keydown', {
+//         key: 'Meta',
+//         code: 'MetaLeft',
+//         metaKey: true,
+//         bubbles: true,
+//     });
 
-    //         tabs.forEach(function (tab) {
-    //             if (tab.status !== "complete") {
-    //                 allTabsLoaded = false;
-    //                 return; // Exit the loop early if any tab is still loading
-    //             }
-    //         });
-    //     });
-    // });
+//     // Create a new KeyboardEvent for the F key
+//     const fKeyDown = new KeyboardEvent('keydown', {
+//         key: 'f',
+//         code: 'KeyF',
+//         metaKey: true,
+//         bubbles: true,
+//     });
 
-    var tabs = await chrome.tabs.query({
-        currentWindow: true
-    });
+//     // Dispatch the events in the desired order
+//     document.dispatchEvent(cmdKeyDown);
+//     document.dispatchEvent(fKeyDown);
 
-    tabs.forEach(function (tab) {
-        if (tab.status !== "complete") {
-            allTabsLoaded = false;
-            return; // Exit the loop early if any tab is still loading
-        }
-    });
+//     // Dispatch the keyup events to release the keys
+//     const keyUpEvents = new KeyboardEvent('keyup', {
+//         key: 'f',
+//         code: 'KeyF',
+//         metaKey: true,
+//         bubbles: true,
+//     });
 
-    return allTabsLoaded;
-}
+//     document.dispatchEvent(keyUpEvents);
+// }

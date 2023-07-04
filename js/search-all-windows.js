@@ -20,6 +20,13 @@ searchAllWindowsButton.addEventListener("click", async function () {
             await allTabsIdsInWindow;
 
             for (let i = 0; i < allTabsIdsInWindow.length; i++) {
+                var tabObject = await chrome.tabs.get(allTabsIdsInWindow[i]);
+                if (tabObject.url.includes('chrome://')) {
+                    allTabsIdsInWindow.splice(i, 1);
+                }
+            }
+
+            for (let i = 0; i < allTabsIdsInWindow.length; i++) {
                 stringFoundTabIds.push(await searchInTab(allTabsIdsInWindow[i], searchString));
             }
 
