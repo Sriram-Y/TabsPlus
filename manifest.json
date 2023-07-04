@@ -24,21 +24,26 @@
         "tabGroups",
         "bookmarks",
         "scripting",
-        "search"
+        "search",
+        "activeTab"
     ],
     "host_permissions": [
-        "<all_urls>"
+        "<all_urls>",
+        "*://*/*"
     ],
     "optional_permissions": [
-        "<all_urls>"
+        "<all_urls>",
+        "*://*/*"
     ],
     "optional_host_permissions": [
-        "<all_urls>"
+        "<all_urls>",
+        "https://*/*"
     ],
     "content_scripts": [
         {
             "matches": [
-                "<all_urls>"
+                "<all_urls>",
+                "*://*/*"
             ],
             "js": [
                 "js/frontend.js", 
@@ -46,9 +51,10 @@
                 "js/close-duplicate-tabs.js", 
                 "js/create-bookmarks-folder-from-window.js", 
                 "js/create-bookmarks-from-groups.js",
+                "js/rename-tab.js",
+                "js/sort-by-domain-name.js",
                 "js/search-all-windows.js"
-            ],
-            "type": "module"
+            ]
         }
     ]
 }
