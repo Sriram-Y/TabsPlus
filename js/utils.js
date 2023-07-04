@@ -1,3 +1,10 @@
+/*
+* Author: Sriram Yadavalli
+* Date: 7-4-2023
+* Description: This script contains important or frequently used functions 
+* that can be used through the application.
+*/
+
 export async function getAllTabsInCurrentWindow() {
     const allTabsInWindow = await chrome.tabs.query({
         currentWindow: true

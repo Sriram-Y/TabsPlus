@@ -1,3 +1,10 @@
+/*
+* Author: Sriram Yadavalli
+* Date: 7-4-2023
+* Description: This script looks for duplicate tabs in a window and closes 
+* duplicate instances of the tab using the URL as comparison.
+*/
+
 import { getAllTabsInCurrentWindow } from "./utils.js";
 
 var closeDuplicatesButton = document.getElementById("closeDuplicates");

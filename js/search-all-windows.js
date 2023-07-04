@@ -1,3 +1,10 @@
+/*
+* Author: Sriram Yadavalli
+* Date: 7-4-2023
+* Description: This script searches through each tab in a window for a user 
+* specified string. The tabs are then displayed underneath the feature button.
+*/
+
 import { getTabIds, getTabTitleFromTabId } from "./utils.js"
 
 var searchAllWindowsButton = document.getElementById("searchAllWindows");

@@ -1,3 +1,11 @@
+/*
+* Author: Sriram Yadavalli
+* Date: 7-4-2023
+* Description: This service worker moves  to the tab that is clicked from the
+* search all feature. It then executes a find with the user specified string 
+* allowing the user to cycle through the found instances of the string.
+*/
+
 chrome.runtime.onMessage.addListener(async function (message) {
     const [id, searchString] = message.message;
     console.log("Received data:", id, searchString);
