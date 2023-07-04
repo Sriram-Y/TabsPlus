@@ -100,6 +100,15 @@ body {
   text-align: left;
  }
 
- 
+ #search-all-windows-menu {
+  padding-left: 0px;
+  display: none;
+  list-style-type: none;
+  margin: 2px 2px 2px 2px;
+  text-align: left;
+ }
 
- 
+#tab-item {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}

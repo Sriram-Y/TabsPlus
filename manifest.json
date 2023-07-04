@@ -23,21 +23,42 @@
         "tabs",
         "tabGroups",
         "bookmarks",
-        "scripting"
+        "scripting",
+        "search",
+        "activeTab"
     ],
     "host_permissions": [
-        "http://*/*",
+        "<all_urls>",
+        "*://*/*"
+    ],
+    "optional_permissions": [
+        "<all_urls>",
+        "*://*/*"
+    ],
+    "optional_host_permissions": [
+        "<all_urls>",
         "https://*/*"
     ],
+    "background": {
+        "service_worker": "js/move-and-find.js",
+        "type": "module"
+    },
     "content_scripts": [
         {
             "matches": [
-                "<all_urls>"
+                "<all_urls>",
+                "*://*/*"
             ],
             "js": [
-                "./js/utils.js"
-            ],
-            "type": "module"
+                "js/frontend.js", 
+                "js/utils.js",
+                "js/close-duplicate-tabs.js", 
+                "js/create-bookmarks-folder-from-window.js", 
+                "js/create-bookmarks-from-groups.js",
+                "js/rename-tab.js",
+                "js/sort-by-domain-name.js",
+                "js/search-all-windows.js"
+            ]
         }
     ]
 }
