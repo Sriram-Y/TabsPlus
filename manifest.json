@@ -39,6 +39,10 @@
         "<all_urls>",
         "https://*/*"
     ],
+    "background": {
+        "service_worker": "js/move-and-find.js",
+        "type": "module"
+    },
     "content_scripts": [
         {
             "matches": [

@@ -4,18 +4,18 @@ var searchAllWindowsButton = document.getElementById("searchAllWindows");
 
 searchAllWindowsButton.addEventListener("click", async function () {
     try {
-        try {
-            loadAllTabsInWindow();
-        }
-        catch (loadingError) {
-            console.error("An error occurred while loading all tabs (preparing for search):", error);
-            alert("There was an error searching through all the tabs.")
-        }
-
         var stringFoundTabIds = [];
         var searchString = prompt("What would you like to search?");
-        
+
         if (searchString != null && searchString.length != 0) {
+            try {
+                loadAllTabsInWindow();
+            }
+            catch (loadingError) {
+                console.error("An error occurred while loading all tabs (preparing for search):", error);
+                alert("There was an error searching through all the tabs.")
+            }
+
             const allTabsIdsInWindow = await getTabIds();
             await allTabsIdsInWindow;
 
@@ -32,14 +32,17 @@ searchAllWindowsButton.addEventListener("click", async function () {
             const menuItemsElement = document.getElementById("search-all-windows-menu");
             menuItemsElement.innerHTML = "";    // clear existing menu items
 
-            if(stringFoundTabIds.length > 0) {
+            if (stringFoundTabIds.length > 0) {
                 stringFoundTabIds.forEach(async function (id) {
                     await getTabTitleFromTabId(id).then(async function (result) {
                         const listItem = document.createElement("li");
                         listItem.id = "tab-item";
                         listItem.textContent = result;
-                        listItem.addEventListener("click", function() {
-                            moveAndFind(id);
+                        listItem.addEventListener("click", async function () {
+                            // await moveAndFind(id, searchString);
+                            await chrome.runtime.sendMessage({
+                                message: [id, searchString]
+                            });
                         });
                         menuItemsElement.appendChild(listItem);
                     });
@@ -64,17 +67,6 @@ searchAllWindowsButton.addEventListener("click", async function () {
     }
 });
 
-async function moveAndFind(tabId) {
-    chrome.tabs.query({}, function (tabs) {
-        for (var i = 0; i < tabs.length; i++) {
-            if (tabs[i].id === tabId) {
-                chrome.tabs.update(tabId, { active: true });
-                break;
-            }
-        }
-    });
-}
-
 async function searchInTab(tabId, searchString) {
     // Execute content script and handle the results
     const injectionResults = await chrome.scripting.executeScript({
@@ -87,10 +79,6 @@ async function searchInTab(tabId, searchString) {
     for (const { frameId, result } of injectionResults) {
         console.log(`Frame ${frameId} Result:`, result, "Tab ID:", tabId, "Tab Title:", getTabTitleFromTabId(tabId));
         if (result === true) {
-            // if (stringFoundTabIds.indexOf(tabId) === -1) {   // avoids duplicates
-            //     stringFoundTabIds.push(tabId);
-            // }
-
             return tabId;
         }
         else {
