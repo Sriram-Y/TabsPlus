@@ -7,7 +7,7 @@
 
 import { getTabIds, getTabTitleFromTabId } from "./utils.js"
 
-var searchAllWindowsButton = document.getElementById("searchAllWindows");
+var searchAllWindowsButton = document.getElementById("search-all-tabs-in-window");
 
 searchAllWindowsButton.addEventListener("click", async function () {
     if (window.confirm("This action will reload all tabs in the window. Are you sure you want to continue?")) {
@@ -45,7 +45,7 @@ searchAllWindowsButton.addEventListener("click", async function () {
                 stringFoundTabIds = stringFoundTabIds.filter(item => stringFoundTabIds.indexOf(item) === stringFoundTabIds.lastIndexOf(item));
     
                 // Now, bring into view the sub menu with titles appearing in a list
-                const menuItemsElement = document.getElementById("search-all-windows-menu");
+                const menuItemsElement = document.getElementById("search-all-tabs-in-window-menu");
                 menuItemsElement.innerHTML = "";    // clear existing menu items
     
                 if (stringFoundTabIds.length > 0) {
