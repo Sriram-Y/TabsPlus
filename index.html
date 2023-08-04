@@ -20,50 +20,50 @@
   <!-- Extension container -->
   <div class="application-container">
 
-    <h2 class="center-text">TabsPlus</h2>
+    <h2 id="center-text">TabsPlus</h2>
     <!-- Feature buttons container -->
-    <div id="allFeaturesContainer">
+    <div id="feature-buttons-container">
 
-      <div id="closeDuplicatesContainer" class="featureContainer">
-        <button id="closeDuplicates" class="featureButton">
+      <div id="close-duplicate-tabs-container" class="feature-container">
+        <button id="close-duplicate-tabs" class="feature-button">
           Close Duplicate Tabs
         </button>
         <!--no sub-menu-->
       </div>
 
-      <div id="groupsToBookmarksFolderContainer" class="featureContainer">
-        <button id="groupsToBookmarksFolder" class="featureButton">
+      <div id="groups-to-bookmarks-folder-container" class="feature-container">
+        <button id="groups-to-bookmarks-folder" class="feature-button">
           Create Bookmarks Folder from Group
         </button>
-        <ul id="create-bookmarks-from-groups-menu"></ul>
+        <ul id="groups-to-bookmarks-folder-menu" hidden="hidden"></ul>
       </div>
 
-      <div id="windowsToBookmarksFolderContainer" class="featureContainer">
-        <button id="windowToBookmarksFolder" class="featureButton">
+      <div id="windows-to-bookmarks-folder-container" class="feature-container">
+        <button id="windows-to-bookmarks-folder" class="feature-button">
           Create Bookmarks Folder from Window
         </button>
-        <ul id="create-bookmarks-from-windows-menu"></ul>
+        <ul id="windows-to-bookmarks-folder-menu" hidden="hidden"></ul>
       </div>
 
-      <div id="renameTabContainer" class="featureContainer">
-        <button id="renameTab" class="featureButton">
+      <div id="rename-tab-container" class="feature-container">
+        <button id="rename-tab" class="feature-button">
           Rename a Tab
         </button>
-        <!--no sub-menu-->
+        <ul id="rename-tab-menu" hidden="hidden"></ul>
       </div>
 
-      <div id="sortByDomainContainer" class="featureContainer">
-        <button id="sortByDomainName" class="featureButton">
+      <div id="sort-by-domain-container" class="feature-container">
+        <button id="sort-by-domain-name" class="feature-button">
           Sort tabs by domain name
         </button>
         <!--no sub-menu-->
       </div>
-      
-      <div id="searchAllTabsContainer" class="featureContainer">
-        <button id="searchAllWindows" class="featureButton">
+
+      <div id="search-all-tabs-in-window-container" class="feature-container">
+        <button id="search-all-tabs-in-window" class="feature-button">
           Search all tabs in window
         </button>
-        <ul id="search-all-windows-menu"></ul>
+        <ul id="search-all-tabs-in-window-menu" hidden="hidden"></ul>
       </div>
 
     </div>
@@ -71,6 +71,7 @@
   </div>
 
 </body>
+
 <!--JS imports-->
 <script type="module" src="js/close-duplicate-tabs.js"></script>
 <script type="module" src="js/create-bookmarks-folder-from-windows.js"></script>
@@ -78,7 +79,6 @@
 <script type="module" src="js/rename-tab.js"></script>
 <script type="module" src="js/search-all-windows.js"></script>
 <script type="module" src="js/sort-by-domain-name.js"></script>
-<script type="module" src="js/frontend.js"></script>
-
+<!-- <script type="module" src="js/frontend.js"></script> -->
 
 </html>
