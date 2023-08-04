@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 body {
-  font-family: 'Montserrat', sans-serif;  
+  font-family: 'Montserrat', sans-serif;
   width: 10rem;
   display: flex;
   flex-direction: column;
@@ -9,29 +9,24 @@ body {
   align-items: center;
   justify-content: center;
   background-color: #e0e5ec;
-	}
+}
 
-  .application-container {
+#center-text {
+  margin: 12px;
+}
+
+.application-container {
   text-align: center;
-   margin: 10px;
-  }
-  
-  h3,
-  p {
-	margin: 0;
-  }
+  margin: 10px;
+}
 
-  h2 {
-    margin: 2px;
-  }
-
-  .button-container {
+.feature-container {
   align-items: center;
   justify-content: center;
   margin: 5 px;
-  }
+}
 
-  .button {
+.feature-button {
   width: 140px;
   height: 40px;
   color: #fff;
@@ -46,69 +41,53 @@ body {
   transition: all 0.3s ease;
   position: relative;
   display: inline-block;
-   box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
-   7px 7px 20px 0px rgba(0,0,0,.1),
-   4px 4px 5px 0px rgba(0,0,0,.1);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  text-align: center;
+  box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
+    7px 7px 20px 0px rgba(0, 0, 0, .1),
+    4px 4px 5px 0px rgba(0, 0, 0, .1);
   outline: none;
-  } 
+}
 
-  .button {  
-    padding: 0;
-    background: rgb(0,172,238);
-    background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);
-  }
-  .button:hover {
-    color: rgba(2,126,251,1);
-    border: none;
-    background: transparent;
-     box-shadow:none;
-  }
-  .button:before,
-  .button:after{
-    content:'';
-    position:absolute;
-    top:0;
-    right:0;
-    height:2px;
-    width:0;
-    background: rgba(2,126,251,1);
-    box-shadow:
-     -1px -1px 5px 0px #fff,
-     7px 7px 20px 0px #0003,
-     4px 4px 5px 0px #0002;
-    transition:400ms ease all;
-  }
-  .button:after{
-    right:inherit;
-    top:inherit;
-    left:0;
-    bottom:0;
-  }
-  .button:hover:before,
-  .button:hover:after{
-    width:100%;
-    transition:800ms ease all;
-  }  
+.feature-button {
+  padding: 0;
+  background: rgb(0, 172, 238);
+  background: linear-gradient(0deg, rgba(0, 172, 238, 1) 0%, rgba(2, 126, 251, 1) 100%);
+}
 
- #rename-tab{
-  padding-left: 0px;
- }
+.feature-button:hover {
+  color: rgba(2, 126, 251, 1);
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
 
- #rename-tab {
-  display: none;
-  margin: 2px 2px 2px 2px;
-  text-align: left;
- }
+.feature-button:before,
+.feature-button:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 2px;
+  width: 0;
+  background: rgba(2, 126, 251, 1);
+  box-shadow:
+    -1px -1px 5px 0px #fff,
+    7px 7px 20px 0px #0003,
+    4px 4px 5px 0px #0002;
+  transition: 400ms ease all;
+}
 
- #search-all-windows-menu {
-  padding-left: 0px;
-  display: none;
-  list-style-type: none;
-  margin: 2px 2px 2px 2px;
-  text-align: left;
- }
+.feature-button:after {
+  right: inherit;
+  top: inherit;
+  left: 0;
+  bottom: 0;
+}
 
-#tab-item {
-  padding-top: 10px;
-  padding-bottom: 10px;
+.feature-button:hover:before,
+.feature-button:hover:after {
+  width: 100%;
+  transition: 800ms ease all;
 }
