@@ -8,11 +8,63 @@ body {
   gap: 1rem;
   align-items: center;
   justify-content: center;
-  background-color: #e0e5ec;
+  background-color: white;
 }
 
-#center-text {
-  margin: 12px;
+.heading-container {
+  display: flex;
+  /* border:1px solid red; */
+  height: 100%;
+  align-items: center;
+}
+
+svg {
+  display: block;
+  /* border:1px solid green; */
+  font: 16em 'Montserrat';
+  width: 150px;
+  height: 50px;
+  margin: 0 auto;
+}
+
+.text-copy {
+  fill: none;
+  stroke: white;
+  stroke-dasharray: 6% 29%;
+  stroke-width: 9px;
+  stroke-dashoffset: 0%;
+  animation: stroke-offset 5.5s infinite linear;
+}
+
+.text-copy:nth-child(1) {
+  stroke: #002244;
+  animation-delay: -1;
+}
+
+.text-copy:nth-child(2) {
+  stroke: #0039a6;
+  animation-delay: -2s;
+}
+
+.text-copy:nth-child(3) {
+  stroke: #318CE7;
+  animation-delay: -3s;
+}
+
+.text-copy:nth-child(4) {
+  stroke: #6CB4EE;
+  animation-delay: -4s;
+}
+
+.text-copy:nth-child(5) {
+  stroke: #7CB9E8;
+  animation-delay: -5s;
+}
+
+@keyframes stroke-offset {
+  100% {
+    stroke-dashoffset: -35%;
+  }
 }
 
 .application-container {
