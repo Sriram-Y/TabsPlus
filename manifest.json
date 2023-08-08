@@ -53,11 +53,11 @@
                 "js/frontend.js", 
                 "js/utils.js",
                 "js/close-duplicate-tabs.js", 
-                "js/create-bookmarks-folder-from-window.js", 
+                "js/create-bookmarks-folder-from-windows.js", 
                 "js/create-bookmarks-from-groups.js",
                 "js/rename-tab.js",
                 "js/sort-by-domain-name.js",
-                "js/search-all-windows.js"
+                "js/search-all-tabs-in-window.js"
             ]
         }
     ]
