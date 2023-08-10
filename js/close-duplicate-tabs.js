@@ -7,7 +7,7 @@
 
 import { getAllTabsInCurrentWindow } from "./utils.js";
 
-var closeDuplicatesButton = document.getElementById("closeDuplicates");
+var closeDuplicatesButton = document.getElementById("close-duplicate-tabs");
 
 closeDuplicatesButton.addEventListener("click", async function() {
     if (window.confirm("This action will close duplicate tabs in the current window (preserving only ones in tab groups). Are you sure you want to continue?")) {
