@@ -81,10 +81,10 @@ export async function getTabGroupTitleFromTabGroupId(tabGroupId) {
 
 export async function getFolderTitle() {
     const title = prompt("Enter a name for your bookmarks folder: ", "My bookmarks");
-    if (title == null || title == "") {
-        alert("Folder name cannot be empty!");
+    if(title === false) {
         return;
     }
-    
-    return title;
+    else {
+        return title;
+    }
 }

@@ -23,32 +23,37 @@ createBookmarksFromGroupButton.addEventListener("mouseover", async function () {
 export async function createBookmarksFolder(groupId) {
     const folderTitle = await getFolderTitle();
 
-    // get tabs in the selected tab group by checking if a tab is attached to groupId
-    const allTabsInCurrentWindow = await getAllTabsInCurrentWindow();
-    var tabsInSelectedTabGroup = [];
-    allTabsInCurrentWindow.forEach((tab) => {
-        if (tab.groupId == groupId) {
-            tabsInSelectedTabGroup.push(tab);
-        }
-    });
+    if (folderTitle != null) {
+        // get tabs in the selected tab group by checking if a tab is attached to groupId
+        const allTabsInCurrentWindow = await getAllTabsInCurrentWindow();
+        var tabsInSelectedTabGroup = [];
+        allTabsInCurrentWindow.forEach((tab) => {
+            if (tab.groupId == groupId) {
+                tabsInSelectedTabGroup.push(tab);
+            }
+        });
 
-    await chrome.bookmarks.create({ title: folderTitle, parentId: '1' }, async (folder) => {
-        if (chrome.runtime.lastError) {
-            console.error(chrome.runtime.lastError);
-            return;
-        }
+        await chrome.bookmarks.create({ title: folderTitle, parentId: '1' }, async (folder) => {
+            if (chrome.runtime.lastError) {
+                console.error(chrome.runtime.lastError);
+                return;
+            }
 
-        for (const tab of tabsInSelectedTabGroup) {
-            await chrome.bookmarks.create({
-                parentId: folder.id,
-                title: tab.title,
-                url: tab.url,
-            });
-        }
-    });
+            for (const tab of tabsInSelectedTabGroup) {
+                await chrome.bookmarks.create({
+                    parentId: folder.id,
+                    title: tab.title,
+                    url: tab.url,
+                });
+            }
+        });
 
-    console.log(folderTitle);
-    console.log(groupId);
+        console.log(folderTitle);
+        console.log(groupId);
+    }
+    else {
+        alert("Folder title cannot be empty!");
+    }
 }
 
 // // create bookmarks folder for the tab group when it's list item is clicked
