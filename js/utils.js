@@ -78,3 +78,13 @@ export async function getTabGroupTitleFromTabGroupId(tabGroupId) {
     console.log("%c" + tabGroupObject.title, "color: red;");
     return tabGroupObject.title;
 }
+
+export async function getFolderTitle() {
+    const title = prompt("Enter a name for your bookmarks folder: ", "My bookmarks");
+    if (title == null || title == "") {
+        alert("Folder name cannot be empty!");
+        return;
+    }
+    
+    return title;
+}
