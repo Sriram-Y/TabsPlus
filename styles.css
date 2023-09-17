@@ -143,3 +143,15 @@ svg {
   width: 100%;
   transition: 800ms ease all;
 }
+
+/* Define the blinking animation */
+@keyframes blink {
+  0% { color: transparent; }
+  50% { color: blue; }
+  100% { color: transparent; }
+}
+
+/* Apply the blinking animation to the blinking class */
+.blinking {
+  animation: blink 0.75s infinite; /* 1s duration, infinite repetitions */
+}
