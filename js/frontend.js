@@ -1,106 +1,76 @@
-import {  getTabIds, getTabTitles, getTabGroupTitles, getAllTabGroupsInCurrentWindow } from './utils.js';
-import { renameTab } from './rename-tab.js';
-import { makeBookmarksFolder } from './create-bookmarks-from-groups.js';
+import { createBookmarksFolder } from "./create-bookmarks-from-groups.js";
 
-// Creates a main menu for renaming tabs.
-// It retrieves tab titles and tab IDs, and allows the user to rename each tab by clicking on the menu items.
-function createMainMenu() {
-  // Get the main menu element with the ID 'rename-tab'
-  const mainMenu = document.getElementById('rename-tab');
+export async function createSubMenu(objects, targetListId, functionDirector) {
+    const subMenuElement = document.getElementById(targetListId);
+    subMenuElement.innerHTML = "";
+    if (objects != null) {
+        objects.forEach(async function (obj) {
+            // const listItem = document.createElement("li");
 
-  // Retrieve tab titles using the getTabTitles function
-  getTabTitles()
-    .then(tabTitlesList => {
-      // Iterate over the tab titles
-      tabTitlesList.forEach((title, index) => {
-        // Create a new menu item element
-        const menuItem = document.createElement('h5');
-        // Set the text content of the menu item to the current tab title
-        menuItem.textContent = title;
-        // Add a click event listener to the menu item
-        menuItem.addEventListener('click', () => {
-          // Prompt the user to enter a new title for the tab
-          const newTitle = prompt("Rename Tab: ");
-          // Retrieve tab IDs using the getTabIds function
-          getTabIds()
-          .then(tabIdsList => {
-            // Get the specific tab ID based on the current index
-            const specificTabId = tabIdsList[index];
-            // Call the renameTab function to rename the tab with the new title
-            renameTab(newTitle, specificTabId);
-            // Update the text content of the menu item to the new title
-            menuItem.textContent = newTitle;
-          });
+            // listItem.id = "item";
+            // listItem.style.textAlign = "left";
+            // listItem.style.listStyle = "none";
+            // listItem.style.padding = "5px";
+            // listItem.onmouseover = function () {
+            //     listItem.style.color = "blue";
+            //     listItem.style.cursor = "pointer";
+            // };
+            // listItem.onmouseout = function () {
+            //     listItem.style.color = "";
+            // };
+            // listItem.style.fontSize = "13px";
+            // listItem.textContent = obj.title;
+
+            const listItem = document.createElement("li");
+
+            listItem.id = "item";
+            listItem.style.textAlign = "left";
+            listItem.style.listStyle = "none";
+            listItem.style.padding = "5px";
+            listItem.style.fontSize = "13px";
+            listItem.textContent = obj.title;
+
+            listItem.onmouseover = function () {
+                // Add a CSS class to apply the blinking animation
+                listItem.classList.add("blinking");
+                listItem.style.color = "blue";
+                listItem.style.cursor = "pointer";
+            };
+
+            listItem.onmouseout = function () {
+                // Add the blinking class back on mouseout
+                listItem.classList.remove("blinking");
+                listItem.style.color = "";
+            };
+
+            switch (functionDirector) {
+                case "createBookmarksFolder":
+                    listItem.addEventListener("click", async function () {
+                        createBookmarksFolder(obj.id);
+                    });
+                    break;
+                default:
+                    console.log("No function with name " + functionDirector + " exists");
+                    break;
+            }
+
+            subMenuElement.appendChild(listItem);
         });
-        // Append the menu item to the main menu
-        mainMenu.appendChild(menuItem);
-      });
-    })
-    .catch(error => {
-      console.error(error);
-    });
-}
-
-createMainMenu();
-
-// Add a mouseover event listener to display the main menu items
-const button = document.getElementById('renameATab');
-const mainMenu = document.getElementById('rename-tab');
-const buttonContainer = document.getElementById('button-container');
-const groupTab = document.getElementById('groupsToBookmarksFolder');
-// const groupMenu = document.getElementById('main-menu');
-button.addEventListener('mouseover', () => {
-mainMenu.style.display = 'block';
-});
-
-// Add a mouseleave event listener to hide the main menu items once leaving container
-buttonContainer.addEventListener('mouseleave', () => {
-    mainMenu.style.display = 'none';
-});
-
-/* 
-  DISPLAY: Bookmarks Folder from Tab Groups 
-*/
-
-const groupBookmarkContainer = document.getElementById("groupBookmarkContainer"); 
-const list = document.getElementById("menu-content");
-
-// get titles of open tab groups and display in submenu
-groupBookmarkContainer.addEventListener('mouseenter', () => {
-  // call the utils function to get all open tab groups and assign to variable
-  const tabGroups = getAllTabGroupsInCurrentWindow();
-  // clear the submenu 
-  list.innerHTML = "";
-  // iterate through all open tab groups and create a list item for each
-  tabGroups.then((result) => {
-    // check if there are any open tab groups
-    if (result.length > 0) {
-      for (const tab of result) {
-        const li = document.createElement("li");
-        // check if tab group is unnamed
-        if (tab.title == "") {
-          // assign the tab group a default name of id and color if unnamed
-          li.textContent = `Group ID: ${tab.id} Color: ${tab.color}`;
-        }
-        else {
-          li.textContent =  `${tab.title}`;
-        }
-        li.style.cursor = "pointer"; 
-        // give each list item an event listener to handle creating a bookmark folder on click 
-        makeBookmarksFolder(li, tab);
-        list.append(li);
-      }
     }
-    // alert the user if there are no open tab groups
     else {
-      const li = document.createElement("li");
-      li.textContent = "No tab groups open";
-      list.appendChild(li);
-    }
-  })
-});
+        const listItem = document.createElement(li);
+        listItem.id = "item";
 
-// clear the sub menu on mouse leave
-groupBookmarkContainer.addEventListener("mouseleave", () => {
-  list.innerHTML = "";
-});
+        listItem.style.textAlign = "left";
+        listItem.style.listStyle = "none";
+        listItem.style.padding = "5px";
+        listItem.style.color = "red";
+        listItem.style.fontSize = "13px";
+
+        listItem.textContent = "None found.";
+
+        subMenuElement.appendChild(listItem);
+    }
+
+    subMenuElement.style.display = "block";
+}
