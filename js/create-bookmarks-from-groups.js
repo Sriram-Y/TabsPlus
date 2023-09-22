@@ -1,11 +1,13 @@
 import { getAllTabGroupsInCurrentWindow, getFolderTitle, getAllTabsInCurrentWindow } from "./utils.js";
 import { createSubMenu } from "./frontend.js";
 
-var createBookmarksFromGroupButton = document.getElementById(
+const targetListId = "groups-to-bookmarks-folder-menu";
+
+var createBookmarksFolderFromGroupButton = document.getElementById(
     "groups-to-bookmarks-folder"
 );
 
-createBookmarksFromGroupButton.addEventListener("mouseover", async function () {
+createBookmarksFolderFromGroupButton.addEventListener("click", async function () {
     const allTabGroupsInWindow = await getAllTabGroupsInCurrentWindow();
     // Resolving the returned promise to a list of tabObjects
     var tabGroupObjects = await allTabGroupsInWindow.map((tabGroup) => ({
@@ -15,7 +17,7 @@ createBookmarksFromGroupButton.addEventListener("mouseover", async function () {
 
     await createSubMenu(
         tabGroupObjects,
-        "groups-to-bookmarks-folder-menu",
+        targetListId,
         "createBookmarksFolder"
     );
 });
@@ -51,32 +53,4 @@ export async function createBookmarksFolder(groupId) {
         console.log(folderTitle);
         console.log(groupId);
     }
-    else {
-        alert("Folder title cannot be empty!");
-    }
 }
-
-// // create bookmarks folder for the tab group when it's list item is clicked
-// export async function makeBookmarksFolder(li, tabGroup) {
-//   li.addEventListener("click", () => {
-//     chrome.tabs.query({groupId: tabGroup.id}, (tabs) => {
-//       var titleCheck = tabGroup.title;
-//       if (titleCheck == "") {
-//         // if tab group is untitled then promp the user for a name
-//         titleCheck = prompt("Enter a name for your bookmarks folder: ", "My bookmarks");
-//         if (titleCheck == null || titleCheck == "") {
-//           alert("Folder name cannot be empty!");
-//           return;
-//         }
-//       }
-//       // create a bookmarks folder
-//       chrome.bookmarks.create( {title: titleCheck, parentId: "1"}, (folder) => {
-//         const urls = tabs.map(url => url.url);
-//         for (const url of urls) {
-//           chrome.bookmarks.create({parentId: folder.id, title: "Bookmark", url});
-//         }
-//       });
-//     });
-
-//   });
-// }

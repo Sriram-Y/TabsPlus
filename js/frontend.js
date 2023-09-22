@@ -5,29 +5,17 @@ export async function createSubMenu(objects, targetListId, functionDirector) {
     subMenuElement.innerHTML = "";
     if (objects != null) {
         objects.forEach(async function (obj) {
-            // const listItem = document.createElement("li");
-
-            // listItem.id = "item";
-            // listItem.style.textAlign = "left";
-            // listItem.style.listStyle = "none";
-            // listItem.style.padding = "5px";
-            // listItem.onmouseover = function () {
-            //     listItem.style.color = "blue";
-            //     listItem.style.cursor = "pointer";
-            // };
-            // listItem.onmouseout = function () {
-            //     listItem.style.color = "";
-            // };
-            // listItem.style.fontSize = "13px";
-            // listItem.textContent = obj.title;
-
             const listItem = document.createElement("li");
 
             listItem.id = "item";
+
+            listItem.className = targetListId + "-items";
+
             listItem.style.textAlign = "left";
             listItem.style.listStyle = "none";
             listItem.style.padding = "5px";
             listItem.style.fontSize = "13px";
+
             listItem.textContent = obj.title;
 
             listItem.onmouseover = function () {
@@ -36,7 +24,6 @@ export async function createSubMenu(objects, targetListId, functionDirector) {
                 listItem.style.color = "blue";
                 listItem.style.cursor = "pointer";
             };
-
             listItem.onmouseout = function () {
                 // Add the blinking class back on mouseout
                 listItem.classList.remove("blinking");
