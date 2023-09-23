@@ -7,19 +7,40 @@ var createBookmarksFolderFromGroupButton = document.getElementById(
     "groups-to-bookmarks-folder"
 );
 
+var toggleSwitchState = false;
 createBookmarksFolderFromGroupButton.addEventListener("click", async function () {
-    const allTabGroupsInWindow = await getAllTabGroupsInCurrentWindow();
-    // Resolving the returned promise to a list of tabObjects
-    var tabGroupObjects = await allTabGroupsInWindow.map((tabGroup) => ({
-        id: tabGroup.id,
-        title: tabGroup.title,
-    }));
+    if(toggleSwitchState == false) {
+        toggleSwitchState = true;
+        const allTabGroupsInWindow = await getAllTabGroupsInCurrentWindow();
+        // Resolving the returned promise to a list of tabObjects
+        var tabGroupObjects = await allTabGroupsInWindow.map((tabGroup) => ({
+            id: tabGroup.id,
+            title: tabGroup.title,
+        }));
 
-    await createSubMenu(
-        tabGroupObjects,
-        targetListId,
-        "createBookmarksFolder"
-    );
+        await createSubMenu(
+            tabGroupObjects,
+            targetListId,
+            "createBookmarksFolder",
+            toggleSwitchState
+        );
+    }
+    else {
+        toggleSwitchState = false;
+        const allTabGroupsInWindow = await getAllTabGroupsInCurrentWindow();
+        // Resolving the returned promise to a list of tabObjects
+        var tabGroupObjects = await allTabGroupsInWindow.map((tabGroup) => ({
+            id: tabGroup.id,
+            title: tabGroup.title,
+        }));
+
+        await createSubMenu(
+            tabGroupObjects,
+            targetListId,
+            "createBookmarksFolder",
+            toggleSwitchState
+        );
+    }
 });
 
 export async function createBookmarksFolder(groupId) {
